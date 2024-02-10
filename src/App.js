@@ -8,12 +8,14 @@ import ReusableDatePicker from "./MateriUiFields/ReusableDatePicker";
 import ReuseablePasswordField from "./MateriUiFields/ReuseablePasswordField";
 import ReusableSelect from "./MateriUiFields/ReusableSelect";
 import ReusableTimePicker from "./MateriUiFields/ReusableTimePicker";
+import ReusablePhoneInput from "./MateriUiFields/ReusablePhoneInput";
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   password: Yup.string().required("Password is required"),
   date: Yup.date().required("Date is required"),
   time: Yup.date().required("Time is required"),
   age: Yup.string().required("Age is required"),
+  MobileNumber: Yup.string().required("Mobile Number is required"),
 });
 const data = {
   name: "Shaheer",
@@ -44,6 +46,7 @@ function App() {
       date: "",
       time: "",
       age: "",
+      MobileNumber: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -148,6 +151,21 @@ function App() {
             formik.touched.age && formik.errors.age ? formik.errors.age : ""
           }
           options={options}
+        />
+      </div>
+      <div className=" col-span-6">
+        <ReusablePhoneInput
+          label="Mobile Number"
+          name="MobileNumber"
+          value={formik.values.MobileNumber}
+          onChange={(value) => formik.setFieldValue("MobileNumber", value)}
+          onBlur={formik.handleBlur}
+          error={formik.touched.MobileNumber && formik.errors.MobileNumber}
+          errorMessage={
+            formik.touched.MobileNumber && formik.errors.MobileNumber
+              ? formik.errors.MobileNumber
+              : null
+          }
         />
       </div>
       <Button
