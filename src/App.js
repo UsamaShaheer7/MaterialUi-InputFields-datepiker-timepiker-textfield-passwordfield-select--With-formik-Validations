@@ -53,6 +53,7 @@ function App() {
       console.log("formik values", values);
       const payload = {
         date: dayjs(values?.date).toISOString(),
+        //--> instead of toISOstring() u can use this when on paylod the date send minus one day it is done because of the utc .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
         time: dayjs(values?.time).format("HH:mm:ss"),
         age: values?.age,
       };
