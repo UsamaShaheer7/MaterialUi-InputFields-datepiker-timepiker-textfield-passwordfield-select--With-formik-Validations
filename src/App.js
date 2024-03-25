@@ -25,6 +25,7 @@ const data = {
   time: "05:21:02",
   password: "12345",
   value: "1",
+  AutoComplete: { label: "morning", value: 1 },
 };
 export const convertTime = (timeString) => {
   if (!timeString) {
@@ -37,13 +38,13 @@ export const convertTime = (timeString) => {
 const options = [
   {
     label: "Software Enginer",
-    value: "shaheer",
+    value: "1",
   },
 ];
 
 const AutoCompleteoptions = [
-  { label: "The Godfather", value: 1 },
-  { label: "Pulp Fiction", value: 2 },
+  { label: "morning", value: 1 },
+  { label: "evening", value: 2 },
 ];
 function App() {
   const formik = useFormik({
@@ -76,9 +77,9 @@ function App() {
   //     formik.setFieldValue("password", data?.password);
   //     formik.setFieldValue("age", data?.value);
   //     formik.setFieldValue("time", convertTime(data?.time));
+  //     formik.setFieldValue("AutoComplete", data?.AutoComplete);
   //   }
   // }, []);
-  console.log("AutoComplete", formik.values.AutoComplete);
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -207,9 +208,10 @@ function App() {
         className=" col-span-6"
         variant="contained"
         type="submit"
+        size="small"
         sx={{
           color: "white",
-          fontWeight: "600",
+          fontWeight: "400",
           background: "#113D4E",
           "&:hover": {
             background: "#2E8295",

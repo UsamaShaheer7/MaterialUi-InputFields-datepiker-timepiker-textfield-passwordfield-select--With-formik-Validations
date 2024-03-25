@@ -22,6 +22,7 @@ const ReusableAutocomplete = ({
     <Autocomplete
       disablePortal
       id={id}
+      value={value}
       getOptionLabel={(option) => option.label}
       onChange={onChange}
       options={options}
