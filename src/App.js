@@ -9,6 +9,7 @@ import ReuseablePasswordField from "./MateriUiFields/ReuseablePasswordField";
 import ReusableSelect from "./MateriUiFields/ReusableSelect";
 import ReusableTimePicker from "./MateriUiFields/ReusableTimePicker";
 import ReusablePhoneInput from "./MateriUiFields/ReusablePhoneInput";
+import ReusableAutocomplete from "./MateriUiFields/ReusableAutocomplete";
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   password: Yup.string().required("Password is required"),
@@ -16,6 +17,7 @@ const validationSchema = Yup.object({
   time: Yup.date().required("Time is required"),
   age: Yup.string().required("Age is required"),
   MobileNumber: Yup.string().required("Mobile Number is required"),
+  AutoComplete: Yup.object().required("AutoComplete Number is required"),
 });
 const data = {
   name: "Shaheer",
@@ -35,8 +37,13 @@ export const convertTime = (timeString) => {
 const options = [
   {
     label: "Software Enginer",
-    value: "1",
+    value: "shaheer",
   },
+];
+
+const AutoCompleteoptions = [
+  { label: "The Godfather", value: 1 },
+  { label: "Pulp Fiction", value: 2 },
 ];
 function App() {
   const formik = useFormik({
@@ -47,6 +54,7 @@ function App() {
       time: "",
       age: "",
       MobileNumber: "",
+      AutoComplete: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -70,6 +78,7 @@ function App() {
   //     formik.setFieldValue("time", convertTime(data?.time));
   //   }
   // }, []);
+  console.log("AutoComplete", formik.values.AutoComplete);
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -156,17 +165,42 @@ function App() {
       </div>
       <div className=" col-span-6">
         <ReusablePhoneInput
-          label="Mobile Number"
-          name="MobileNumber"
-          value={formik.values.MobileNumber}
-          onChange={(value) => formik.setFieldValue("MobileNumber", value)}
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          label="Select"
+          name="age"
+          value={formik.values.age}
+          onChange={(selecedValue) => {
+            formik.setFieldValue("age", selecedValue.target.value);
+          }}
           onBlur={formik.handleBlur}
-          error={formik.touched.MobileNumber && formik.errors.MobileNumber}
+          error={formik.touched.age && Boolean(formik.errors.age)}
           errorMessage={
-            formik.touched.MobileNumber && formik.errors.MobileNumber
-              ? formik.errors.MobileNumber
-              : null
+            formik.touched.age && formik.errors.age ? formik.errors.age : ""
           }
+          options={options}
+        />
+      </div>
+      <div className=" col-span-6 ">
+        <ReusableAutocomplete
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          label="AutoComplete"
+          name="AutoComplete"
+          value={formik.values.AutoComplete}
+          onChange={(_, selecedValue) => {
+            formik.setFieldValue("AutoComplete", selecedValue);
+          }}
+          onBlur={formik.handleBlur}
+          error={
+            formik.touched.AutoComplete && Boolean(formik.errors.AutoComplete)
+          }
+          errorMessage={
+            formik.touched.AutoComplete && formik.errors.AutoComplete
+              ? formik.errors.AutoComplete
+              : ""
+          }
+          options={AutoCompleteoptions}
         />
       </div>
       <Button
