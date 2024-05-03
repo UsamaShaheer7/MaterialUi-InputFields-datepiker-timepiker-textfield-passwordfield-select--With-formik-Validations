@@ -55,7 +55,7 @@ function App() {
       time: "",
       age: "",
       MobileNumber: "",
-      AutoComplete: "",
+      AutoComplete: null,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {

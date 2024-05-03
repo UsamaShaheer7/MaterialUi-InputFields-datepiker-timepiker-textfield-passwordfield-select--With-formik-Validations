@@ -65,6 +65,11 @@ const ReusableAutocomplete = ({
               </React.Fragment>
             ),
           }}
+          filterOptions={(options, { inputValue }) => {
+              return options.filter((option) =>
+                option.label.toLowerCase().includes(inputValue.toLowerCase())
+              );
+            }}
         />
       )}
       sx={{
