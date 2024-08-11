@@ -3,13 +3,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button } from "@mui/material";
 import dayjs from "dayjs";
-import ReusableTextField from "./MateriUiFields/ReusableTextField";
-import ReusableDatePicker from "./MateriUiFields/ReusableDatePicker";
-import ReuseablePasswordField from "./MateriUiFields/ReuseablePasswordField";
-import ReusableSelect from "./MateriUiFields/ReusableSelect";
-import ReusableTimePicker from "./MateriUiFields/ReusableTimePicker";
-import ReusablePhoneInput from "./MateriUiFields/ReusablePhoneInput";
-import ReusableAutocomplete from "./MateriUiFields/ReusableAutocomplete";
+import TextField from "./InputFields/TextField";
+import DatePicker from "./InputFields/DatePicker";
+import PasswordField from "./InputFields/PasswordField";
+import Select from "./InputFields/Select";
+import TimePicker from "./InputFields/TimePicker";
+import PhoneInput from "./InputFields/PhoneInput";
+import SearchSelect from "./InputFields/SearchSelect";
+
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   password: Yup.string().required("Password is required"),
@@ -51,10 +52,10 @@ function App() {
     initialValues: {
       name: "",
       password: "",
-      date: "",
-      time: "",
+      date: dayjs(),
+      time: dayjs(),
       age: "",
-      MobileNumber: "",
+      MobileNumber: "+92",
       AutoComplete: null,
     },
     validationSchema: validationSchema,
@@ -86,7 +87,7 @@ function App() {
       className="px-[40px] py-[40px] grid grid-cols-12 gap-10"
     >
       <div className=" col-span-6">
-        <ReusableTextField
+        <TextField
           label="Name"
           name="name"
           onBlur={formik.handleBlur}
@@ -99,7 +100,7 @@ function App() {
         />
       </div>
       <div className=" col-span-6 ">
-        <ReusableDatePicker
+        <DatePicker
           label="Date"
           name="date"
           value={formik?.values?.date}
@@ -115,7 +116,7 @@ function App() {
         />
       </div>
       <div className=" col-span-6">
-        <ReuseablePasswordField
+        <PasswordField
           label="Password"
           name="password"
           value={formik.values.password}
@@ -130,7 +131,7 @@ function App() {
         />
       </div>
       <div className=" col-span-6 ">
-        <ReusableTimePicker
+        <TimePicker
           label="Time"
           name="time"
           value={formik.values.time}
@@ -147,7 +148,7 @@ function App() {
         />
       </div>
       <div className=" col-span-6">
-        <ReusableSelect
+        <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           label="Select"
@@ -165,25 +166,29 @@ function App() {
         />
       </div>
       <div className=" col-span-6">
-        <ReusablePhoneInput
+        <PhoneInput
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          label="Select"
-          name="age"
-          value={formik.values.age}
+          label="MobileNumber"
+          name="MobileNumber"
+          value={formik.values.MobileNumber}
           onChange={(selecedValue) => {
-            formik.setFieldValue("age", selecedValue.target.value);
+            formik.setFieldValue("MobileNumber", selecedValue.target.value);
           }}
           onBlur={formik.handleBlur}
-          error={formik.touched.age && Boolean(formik.errors.age)}
-          errorMessage={
-            formik.touched.age && formik.errors.age ? formik.errors.age : ""
+          error={
+            formik.touched.MobileNumber && Boolean(formik.errors.MobileNumber)
+          }
+          errorMessMobileNumber={
+            formik.touched.MobileNumber && formik.errors.MobileNumber
+              ? formik.errors.MobileNumber
+              : ""
           }
           options={options}
         />
       </div>
       <div className=" col-span-6 ">
-        <ReusableAutocomplete
+        <SearchSelect
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           label="AutoComplete"
